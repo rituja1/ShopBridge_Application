@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MVC.Models.MVCProductModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+
+<p>
+    <a href="@Url.Action("AddorEdit","Product")" class="btn btn-primary">Create New</a>
+</p>
+<table class="table table-striped">
+    <thead class="table-hover"
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a href="@Url.Action("AddorEdit","Product",new { id=item.ProductID})" class="btn btn-success">Edit</a>
+                <a href="@Url.Action("Delete","Product",new { id=item.ProductID})" class="btn btn-warning">Delete</a>
+                
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts{
+    <script>
+        $(function () {
+            var succes = '@TempData["success"]'
+            if (succes != '') {
+                alertify.success(succes)
+            }
+        })
+    </script>
+}
